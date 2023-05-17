@@ -1,113 +1,157 @@
-import Image from 'next/image'
+'use client';
+import React, {useState} from "react";
+import {
+    BsArrowLeftShort,
+    BsChevronDown,
+    BsFillImageFill,
+    BsPerson,
+    BsReverseLayoutTextSidebarReverse,
+    BsSearch
+} from "react-icons/bs";
+import {
+    AiFillEnvironment,
+    AiOutlineBarChart,
+    AiOutlineFileText,
+    AiOutlineLogout,
+    AiOutlineSetting
+} from "react-icons/ai";
+import {RiDashboardFill} from "react-icons/ri";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    const [showSideNav, setShowSideNav] = useState(true)
+    const [showSubSideNav, setShowSubSideNav] = useState(false)
+    const [theme, setTheme] = useState("light");
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+    const handleThemeToggle = () => {
+        setTheme(theme === "light" ? "dark" : "light");
+    };
+    const Menus = [
+        {
+            id: 1,
+            title: "Dashboard"
+        },
+        {
+            id: 2,
+            title: "Pages", icon: <AiOutlineFileText/>
+        },
+        {
+            id: 3,
+            title: "Media", spacing: true,
+            icon: <BsFillImageFill/>,
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+        },
+        {
+            id: 4,
+            title: "Projects",
+            icon: <BsReverseLayoutTextSidebarReverse/>,
+            submenu: true,
+            submenuItems: [
+                {
+                    id: 1,
+                    title: "Submenu 1"
+                },
+                {
+                    id: 2,
+                    title: "Submenu 2"
+                },
+            ]
+        },
+        {
+            id: 5,
+            title: "Analytics",
+            icon: <AiOutlineBarChart/>
+        },
+        {
+            id: 6,
+            title: "Profile",
+            icon: <BsPerson/>,
+            spacing: true
+        },
+        {
+            id: 7,
+            title: "Setting",
+            icon: <AiOutlineSetting/>
+        },
+        {
+            id: 8,
+            title: "Logout", icon: <AiOutlineLogout/>
+        }
+    ];
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+    return (
+        <main className="flex bg-white dark:bg-black">
+            <div
+                className={`bg-dark-purple  h-screen p-5 pt-8 ${showSideNav ? "w-72" : "w-20"} duration-300 relative`}>
+                <BsArrowLeftShort className={`
+                bg-white
+                text-dark-purple
+                text-3xl
+                rounded-full
+                absolute
+                -right-3
+                top-9
+                border
+                border-dark-purple
+                cursor-pointer
+                ${!showSideNav && "rotate-180"}`} onClick={() => setShowSideNav(!showSideNav)}
+                />
+                <div className="inline-flex">
+                    <AiFillEnvironment
+                        className={`bg-amber-300 text-4xl rounded cursor-pointer block float-left mr-2 duration-500 ${showSideNav && "rotate-[360deg]"}`}/>
+                    <h1 className={`text-white origin-left font-medium text-2xl ${!showSideNav && "scale-0"} duration-300`}>
+                        Tailwind
+                    </h1>
+                </div>
+                <div
+                    className={`flex items-center rounded-md bg-light-white mt-6 ${!showSideNav ? "px-2.5" : "px-4"} py-2 h-10`}>
+                    <BsSearch
+                        className={`text-white text-lg block float-left cursor-pointer ${showSideNav && "mr-2"}`}/>
+                    <input type="search" placeholder={"Search"}
+                           className={`text-base bg-transparent w-full text-white focus:outline-none mr-2 ${!showSideNav && "hidden"}`}/>
+                </div>
+                <ul className="pt-2">
+                    {Menus.map((menu) => (
+                        <>
+                            <li key={menu.id} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2
+                        hover:bg-light-white rounded-md ${menu.spacing ? "mt-9" : "mt-2"}`}>
+                                <span className={`text-2xl block float-left`}>
+                                 {menu.icon ? menu.icon : <RiDashboardFill/>}
+                                </span>
+                                <span
+                                    className={`text-base font-medium flex-1 duration-200 ${!showSideNav && "hidden"}`}>
+                                    {menu.title}
+                                </span>
+                                {menu.submenu && showSideNav && (
+                                    <BsChevronDown className={`${showSubSideNav && "rotate-180"}`}
+                                                   onClick={() => (setShowSubSideNav(!showSubSideNav))}/>
+                                )}
+                            </li>
+                            {menu.submenu && showSideNav && showSubSideNav && (
+                                <ul>
+                                    {menu.submenuItems.map((submenu) => (
+                                        <li key={submenu.id} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5
+                        hover:bg-light-white rounded-md`}>
+                                            {submenu.title}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </>
+                    ))}
+                </ul>
+                {/*<div className="flex items-center mt-auto">*/}
+                {/*    <button*/}
+                {/*        className="text-white text-lg p-2 cursor-pointer"*/}
+                {/*        onClick={handleThemeToggle}*/}
+                {/*    >*/}
+                {/*        {theme === "light" ? <IoMoon /> : <IoSunny />}*/}
+                {/*    </button>*/}
+                {/*</div>*/}
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+            </div>
+
+            <div className="p-7"><h1 className="text-2xl font-semibold"> Home Page </h1></div>
+        </main>
+    )
 }
